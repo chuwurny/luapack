@@ -14,10 +14,23 @@ end
 
 luapack.LogFile = file.Open("luapack.txt", "w", "DATA")
 
+luapack.LOG_LEVEL_NONE = 0
+luapack.LOG_LEVEL_ONLY_LOG = 1
+luapack.LOG_LEVEL_ALL = 2
+
+luapack.LogLevel = CreateConVar(
+	"luapack_loglevel",
+	"0",
+	FCVAR_ARCHIVE,
+	"0 - disable all logs. 1 - only log messages. 2 - all messages."
+)
+
 function luapack.LogMsg(...)
 	local content = string.format(...)
 
-	Msg(content)
+	if luapack.LogLevel:GetInt() >= luapack.LOG_LEVEL_ONLY_LOG then
+		Msg(content)
+	end
 
 	luapack.LogFile:Write(content)
 	luapack.LogFile:Flush()
@@ -26,7 +39,9 @@ end
 function luapack.DebugMsg(...)
 	local content = string.format(...)
 
-	Msg(content)
+	if luapack.LogLevel:GetInt() >= luapack.LOG_LEVEL_ALL then
+		Msg(content)
+	end
 
 	luapack.LogFile:Write(content)
 	luapack.LogFile:Flush()
