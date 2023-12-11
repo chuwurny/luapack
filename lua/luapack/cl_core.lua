@@ -94,7 +94,7 @@ function luapack.BuildFileList(filepath)
 	return dir
 end
 
-luapack.RootDirectory = luapack.BuildFileList("download/data/luapack/" .. luapack.CurrentHash .. ".dat")
+luapack.RootDirectory = luapack.BuildFileList("download/data/luapack/" .. luapack.CurrentHash .. ".bsp")
 
 local totaltime = 0
 

@@ -246,7 +246,7 @@ hook.Add("InitPostEntity", "luapack resource creation", function()
 	table.sort(hashes)
 	luapack.CurrentHash = util.SHA256(table.concat(hashes))
 
-	local currentpath = "luapack/" .. luapack.CurrentHash .. ".dat"
+	local currentpath = "luapack/" .. luapack.CurrentHash .. ".bsp"
 	if not file.Exists(currentpath, "DATA") then
 		if not luapack.Rename(luapacktemp, currentpath) then
 			luapack.DebugMsg("Pack file renaming not successful\n")
